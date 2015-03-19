@@ -1,4 +1,4 @@
-package uk.co.blc_services.smartgenie_crm;
+package uk.co.blc_services.smartgenie.web;
 
 /**
  * Hello world!
