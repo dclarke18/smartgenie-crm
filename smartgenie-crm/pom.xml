@@ -24,6 +24,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>uk.co.blc-services</groupId>
+			<artifactId>smartgenie-crm-data</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<!-- For future use <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mobile</artifactId>
