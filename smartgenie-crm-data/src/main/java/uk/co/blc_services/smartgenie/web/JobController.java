@@ -14,8 +14,13 @@ public class JobController {
 	@Autowired
 	private JobRepository repo;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String welcome(Model model) {
+	@RequestMapping(value = "/hello", method = RequestMethod.GET)
+	public String welcome() {
+		return "welcome";
+	}
+	
+	@RequestMapping(value = "/web/*", method = RequestMethod.GET)
+	public String jobList(Model model) {
 		Iterable<Job> jobs = repo.findAll(); //TODO add paging
 		model.addAttribute("jobs", jobs);
 		return "job-list";

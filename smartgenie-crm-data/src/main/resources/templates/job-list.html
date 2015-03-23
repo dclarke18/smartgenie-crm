@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<title></title>
+<meta name="description" content="HTML 5 CSS 3 Spring Form" />
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<link rel="stylesheet" href="../../css/style.css"
+	th:href="@{/css/style.css}" />
+
+<script src="../../js/libs/modernizr-2.0.6.min.js"
+	th:src="@{/js/libs/modernizr-2.0.6.min.js}"></script>
+</head>
+
+<body>
+	<div id="container">
+		<table id="display-data">
+			<thead>
+				<tr>
+					<th th:text="#{theader.count}">#</th>
+					<th th:text="#{theader.jobId}">Job No.</th>
+					<th th:text="#{theader.jobOrderId}">Order No.</th>
+					<th th:text="#{theader.jobVehicleReg}">Reg No.</th>
+					<th th:text="#{theader.jobName}">Name</th>
+					<th th:text="#{theader.jobAddress}">Address</th>
+					<th th:text="#{theader.jobEmailAddress}">Email</th>
+					<th th:text="#{theader.jobTelNo}">Tel No.</th>
+					<th th:text="#{theader.jobVehicleMakeAndModel}">Make &amp; Model</th>
+					<th th:text="#{theader.jobDamageDescription}">Damage Description</th>
+					<th th:text="#{theader.jobPrice}">Price(Net)</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="job, rowStat : ${jobs}">
+					<td th:text="${rowStat.count}">1</td>
+					<td th:text="${job.id}">1001</td>
+					<td th:text="${job.orderId}">REV-03458-C5K4Y1</td>
+					<td th:text="${job.vehicleReg}">EO59 WXG</td>
+					<td th:text="${job.name}">Dave Clarke</td>
+					<td th:text="${job.address}">No Fixed Abode</td>
+					<td th:text="${job.emailAddress}">dave.clarke@gmail.com</td>
+					<td th:text="${job.telNo}">07974 645920</td>
+					<td th:text="${job.vehicleMakeAndModel}">Toyota IQ</td>
+					<td th:text="${job.damageDescription}">All panels scraped</td>
+					<td th:text="#{global.currency} + ${#numbers.formatDecimal(job.price,0,'COMMA',2,'POINT')}">£100</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<script>
+		/*<![CDATA[*/
+		//Embbeded Javascript         
+		/*]]>*/
+	</script>
+
+</body>
+</html>

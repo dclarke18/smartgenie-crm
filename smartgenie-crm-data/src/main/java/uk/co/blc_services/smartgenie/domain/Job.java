@@ -3,6 +3,8 @@
  */
 package uk.co.blc_services.smartgenie.domain;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -54,7 +56,7 @@ public class Job {
 	private String vehicleMakeAndModel;
 	private String vehicleReg;
 	private String damageDescription;
-	private String price;
+	private BigDecimal price;
 	public String getOrderId() {
 		return orderId;
 	}
@@ -103,10 +105,10 @@ public class Job {
 	public void setDamageDescription(String damageDescription) {
 		this.damageDescription = damageDescription;
 	}
-	public String getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 	public long getId() {
