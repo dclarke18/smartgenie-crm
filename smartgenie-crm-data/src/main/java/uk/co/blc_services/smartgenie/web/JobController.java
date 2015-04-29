@@ -19,10 +19,23 @@ public class JobController {
 		return "welcome";
 	}
 	
-	@RequestMapping(value = "/web/*", method = RequestMethod.GET)
+	@RequestMapping(value = "/web/jobs/list", method = RequestMethod.GET)
 	public String jobList(Model model) {
 		Iterable<Job> jobs = repo.findAll(); //TODO add paging
 		model.addAttribute("jobs", jobs);
 		return "job-list";
+	}
+	
+	@RequestMapping(value = "/web/jobs/add", method = RequestMethod.GET)
+	public String jobForm(Model model) {
+		model.addAttribute("job", new Job());
+		return "job-add";
+	}
+	
+	@RequestMapping(value = "/web/jobs/add", method = RequestMethod.POST)
+	public String jobSubmit(Job toAdd, Model model) {
+		Job saved = repo.save(toAdd);
+		model.addAttribute("message", "Saved Job : "+saved.getId()+" - "+saved.getOrderId());
+		return jobList(model);//TODO is this the right way to redirect?
 	}
 }

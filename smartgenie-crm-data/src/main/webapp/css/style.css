@@ -372,7 +372,7 @@ fieldset {
 
 input,textarea {
 	padding: 8px;
-	margin: 4px 0 20px 0;
+	margin: 4px 10px;
 	background: #fff;
 	width: 220px;
 	font-size: 14px;
@@ -385,6 +385,12 @@ input,textarea {
 	/* -- CSS3 Transition - define what the transition will be applied to (i.e. the background) -- */
 	-webkit-transition: background 0.3s linear;
 }
+
+textarea {
+	width: 300px;
+	height: 100px;
+}
+
 
 /* 
  * 1. Correct color not inheriting in IE6/7/8/9 
@@ -400,19 +406,14 @@ legend {
 label {
 	font-size: 15px;
 	color: #666;
+	display: block;  /* block float the labels to left column, set a width */
+	float: left; 
+	width: 150px; 
+	padding: 0; 
+	margin: 5px 0 0; /* set top margin same as form input - textarea etc. elements */
+	text-align: right; 
 }
 
-/*
- * 1. Correct font-size not inheriting in all browsers
- * 2. Remove margins in FF3/4 S5 Chrome
- * 3. Define consistent vertical alignment display in all browsers
- */
-button,input,select,textarea {
-	font-size: 100%;
-	margin: 0;
-	vertical-align: baseline;
-	*vertical-align: middle;
-}
 
 /*
  * 1. Define line-height as normal to match FF3/4 (set using !important in the UA stylesheet)
@@ -461,11 +462,6 @@ button
 :-moz-focus-inner {
 	border: 0;
 	padding: 0;
-}
-
-textarea {
-	width: 390px;
-	height: 175px;
 }
 
 /* Remove default vertical scrollbar in IE6/7/8/9 */
@@ -880,7 +876,7 @@ form {
 	float: left;
 	border: 1px solid #ddd;
 	padding: 30px 40px 20px 40px;
-	margin: 75px 0 0 0;
+	margin: 0 0 0 0;
 	width: 715px;
 	background: #fff;
 	/* -- CSS3 - define rounded corners -- */
@@ -903,15 +899,7 @@ fieldset {
 	padding: 0;
 }
 
-input,textarea {
-	padding: 8px;
-	margin: 4px 0 20px 0;
-	background: #fff;
-	width: 220px;
-	font-size: 14px;
-	color: #555;
-	border: 1px #ddd solid;
-}
+
 
 /* 
  * 1. Correct color not inheriting in IE6/7/8/9 
@@ -936,7 +924,6 @@ label {
  */
 button,input,select,textarea {
 	font-size: 100%;
-	margin: 0;
 	vertical-align: baseline;
 	*vertical-align: middle;
 }
@@ -1007,16 +994,13 @@ button::-moz-focus-inner,input::-moz-focus-inner {
 	padding: 0;
 }
 
-textarea {
-	width: 390px;
-	height: 175px;
-}
 
 /* Remove default vertical scrollbar in IE6/7/8/9 */
 textarea {
 	overflow: auto;
 	vertical-align: top;
 }
+
 
 /* Colors for form validity */
 input:valid,textarea:valid {
@@ -1124,64 +1108,3 @@ table {
 	/* Style adjustments for viewports 768px and over go here */
 }
 
-/* =============================================================================
-   Print styles.
-   Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
-   ========================================================================== */
-@media print {
-	* {
-		background: transparent !important;
-		color: black !important;
-		text-shadow: none !important;
-		filter: none !important;
-		-ms-filter: none !important;
-	} /* Black prints faster: sanbeiji.com/archives/953 */
-	a,a
-:visited {
-		color: #444 !important;
-		text-decoration: underline;
-	}
-	a
-[href]
-:after {
-		content: " (" attr(href) ")";
-	}
-	abbr
-[title]
-:after {
-		content: " (" attr(title) ")";
-	}
-	.ir
- 
-a
-:after,a
-[href ^ ="javascript:"]
-:after,a
-[href ^ ="#"]
-:after {
-		content: "";
-	} /* Don't show links for images, or javascript/internal links */
-	pre,blockquote {
-		border: 1px solid #999;
-		page-break-inside: avoid;
-	}
-	thead {
-		display: table-header-group;
-	} /* css-discuss.incutio.com/wiki/Printing_Tables */
-	tr,img {
-		page-break-inside: avoid;
-	}
-	img {
-		max-width: 100% !important;
-	}
-	@page {
-		margin: 0.5cm;
-	}
-	p,h2,h3 {
-		orphans: 3;
-		widows: 3;
-	}
-	h2,h3 {
-		page-break-after: avoid;
-	}
-}
