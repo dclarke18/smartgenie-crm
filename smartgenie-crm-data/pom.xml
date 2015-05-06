@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.co.blc-services</groupId>
 	<artifactId>smartgenie-crm-data</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<name>smartgenie-crm-data</name>
 	<description>Persistence and data access services for the Smartgenie CRM system</description>
 	<!-- <packaging>war</packaging> -->
@@ -31,16 +31,12 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 		</dependency>
-		<!-- <dependency>
-			<groupId>com.github.dandelion</groupId>
-			<artifactId>datatables-thymeleaf</artifactId>
-			<version>0.10.1</version>
-		</dependency>-->
 	</dependencies>
 	<properties>
 		<!-- use UTF-8 for everything -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<build>
@@ -49,7 +45,15 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
 		</plugins>
+
 	</build>
 
 	<repositories>
