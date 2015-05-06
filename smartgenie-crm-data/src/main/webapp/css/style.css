@@ -437,12 +437,13 @@ button,input
 
 /*
  * Consistent box sizing and appearance
- */
+
 input
 [type="checkbox"],input
 [type="radio"] {
 	box-sizing: border-box;
 }
+ */
 
 input
 [type="search"] {
@@ -915,6 +916,7 @@ legend {
 label {
 	font-size: 20px;
 	color: #666;
+	white-space:nowrap;
 }
 
 /*
@@ -976,9 +978,15 @@ input[type="submit"]:hover {
  * Consistent box sizing and appearance
  */
 input[type="checkbox"],input[type="radio"] {
-	box-sizing: border-box;
+	width : initial;
+	box-sizing: content-box;
+	outline: none;
+	-webkit-box-shadow: 0px 0px 0px #aaa;
+	-moz-box-shadow: 0px 0px 0px #aaa;
+	box-shadow: 0px 0px 0px #aaa;
 }
 
+ 
 input[type="search"] {
 	-moz-box-sizing: content-box;
 	-webkit-box-sizing: content-box;

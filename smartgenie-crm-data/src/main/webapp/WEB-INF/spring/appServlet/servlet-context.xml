@@ -9,10 +9,10 @@
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
 
-	
-	<context:component-scan base-package="uk.co.blc_services.paybyplate_ci" />
+
+	<context:component-scan base-package="uk.co.blc_services.smartgenie" />
 	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven validator="validator"/>
+	<annotation-driven validator="validator" />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
@@ -26,28 +26,31 @@
 		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
 		<beans:property name="defaultLocale" value="en_GB" />
 	</beans:bean>
- 
+
 	<beans:bean id="localeChangeInterceptor"
 		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 		<beans:property name="paramName" value="language" />
 	</beans:bean>
- 
-	<beans:bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" >
+
+	<beans:bean
+		class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
 		<beans:property name="interceptors">
-		   <beans:list>
-			<beans:ref bean="localeChangeInterceptor" />
-		   </beans:list>
+			<beans:list>
+				<beans:ref bean="localeChangeInterceptor" />
+			</beans:list>
 		</beans:property>
 	</beans:bean>
 
-	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	<beans:bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<beans:property name="basename" value="locale/messages" />
 	</beans:bean>
-	
+
 	<!-- JSR-303 -->
-	<beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-    	<beans:property name="validationMessageSource" ref="messageSource"/>
- 	</beans:bean>
+	<beans:bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<beans:property name="validationMessageSource" ref="messageSource" />
+	</beans:bean>
 
 	<!-- **************************************************************** -->
 	<!-- THYMELEAF-SPECIFIC ARTIFACTS -->
@@ -63,6 +66,12 @@
 
 	<beans:bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
 		<beans:property name="templateResolver" ref="templateResolver" />
+		<!-- <beans:property name="additionalDialects">
+			<beans:set>
+				<beans:bean
+					class="com.github.dandelion.datatables.thymeleaf.dialect.DataTablesDialect" />
+			</beans:set>
+		</beans:property>-->
 	</beans:bean>
 
 	<beans:bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">

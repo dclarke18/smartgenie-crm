@@ -4,116 +4,314 @@
 package uk.co.blc_services.smartgenie.domain;
 
 import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Version;
 
 /**
  * Represents the SmartGenie Smart repair Job/Order/Lead.
  * 
- * Example:
- * NA-Insurance job  REV-03458- Complectus Ltd 
-
-	Client details
-
-	Name: Mr P Cook 
-
-	Address:  Ladywood
-	Langley Road
-	Chipperfield WD4 9JS
-
-	Email Address:  
-
-	Tel No.:   01923 262 120    
-
-	Vehicle Make & Model: Range Rover Sport 
-
-	Vehicle Reg: FY11 KFP 
-
-	Damage:  rear bumper (o/s of number plate)
-
-	Price: £105.00
+ * Example: NA-Insurance job REV-03458- Complectus Ltd
+ * 
+ * Client details
+ * 
+ * Name: Mr P Cook
+ * 
+ * Address: Ladywood Langley Road Chipperfield WD4 9JS
+ * 
+ * Email Address:
+ * 
+ * Tel No.: 01923 262 120
+ * 
+ * Vehicle Make & Model: Range Rover Sport
+ * 
+ * Vehicle Reg: FY11 KFP
+ * 
+ * Damage: rear bumper (o/s of number plate)
+ * 
+ * Price: £105.00
+ * 
  * @author dave.clarke@blc-services.co.uk
  *
  */
 @Entity
 public class Job {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+
+	/**
+	 * Type of the job - this should probably be a class per type consider
+	 * refactoring into class per type if type attributes diverge further.
+	 */
+	private JobType type;
+
+	/**
+	 * status of the job
+	 */
+	private JobStatus status;
+
+	/**
+	 * Date this job was received by company. Not necessarily the date this was
+	 * logged into this system.
+	 */
+	private LocalDate dateReceived;
+
+	/**
+	 * System metadata should only be populated by the DB/JPA.
+	 */
+	@Version
+	private int version;
+
+	/**
+	 * System metadata should only be populated by the DB/JPA.
+	 */
+	private Instant createdDate;
+	/**
+	 * System metadata should only be populated by the DB/JPA.
+	 */
+	private Instant lastModified;
+
+	/**
+	 * Customers full name
+	 */
+	private String name;
+
+	/**
+	 * address of the customer
+	 */
+	private String address;
+
+	/**
+	 * postcode of the customer
+	 */
+	private String postcode;
+
+	/**
+	 * customers email address
+	 */
+	private String emailAddress;
+
+	/**
+	 * Customer telephone number
+	 */
+	private String telNo;
+
+	private String vehicleMakeAndModel;
+
+	private String vehicleReg;
+	private String damageDescription;
+
+	/**
+	 * Does the repairing technician need to take photos and upload them.
+	 */
+	private Boolean imagesRequired;
+
+	/**
+	 * price of the repair excluding vat
+	 */
+	private BigDecimal price;
+
+	/* ******************* *
+	 * TYPE SPECIFIC FIELDS ********************
+	 */
+
+	/* NATIONAL ACCOUNT */
 	/**
 	 * National account order id
 	 */
 	private String orderId;
-	private String name;
-	private String address;
-	private String emailAddress;
-	private String telNo;
-	private String vehicleMakeAndModel;
-	private String vehicleReg;
-	private String damageDescription;
-	private BigDecimal price;
-	public String getOrderId() {
-		return orderId;
+
+	/* RETAIL */
+	/**
+	 * Where the lead came from, what made them call Revive?
+	 */
+	private String leadSource;
+
+	/* TRADE */
+	/**
+	 * What trade customer requested the job
+	 */
+	private String traderName;
+
+	/**
+	 * Name of the contact (normally a sales person) who requested the job.
+	 */
+	private String tradeContactName;
+
+	/* ************************** *
+	 * End of TYPE SPECIFIC FIELDS ***************************
+	 */
+
+	@PrePersist
+	void createdAt() {
+		this.createdDate = this.lastModified = Instant.now();
 	}
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
+
+	@PreUpdate
+	void updatedAt() {
+		this.lastModified = Instant.now();
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getEmailAddress() {
-		return emailAddress;
-	}
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
-	public String getTelNo() {
-		return telNo;
-	}
-	public void setTelNo(String telNo) {
-		this.telNo = telNo;
-	}
-	public String getVehicleMakeAndModel() {
-		return vehicleMakeAndModel;
-	}
-	public void setVehicleMakeAndModel(String vehicleMakeAndModel) {
-		this.vehicleMakeAndModel = vehicleMakeAndModel;
-	}
-	public String getVehicleReg() {
-		return vehicleReg;
-	}
-	public void setVehicleReg(String vehicleReg) {
-		this.vehicleReg = vehicleReg;
-	}
-	public String getDamageDescription() {
-		return damageDescription;
-	}
-	public void setDamageDescription(String damageDescription) {
-		this.damageDescription = damageDescription;
-	}
-	public BigDecimal getPrice() {
-		return price;
-	}
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
+
 	public long getId() {
 		return id;
 	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+
+	public JobType getType() {
+		return type;
+	}
+
+	public void setType(JobType type) {
+		this.type = type;
+	}
+
+	public JobStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(JobStatus status) {
+		this.status = status;
+	}
+
+	public LocalDate getDateReceived() {
+		return dateReceived;
+	}
+
+	public void setDateReceived(LocalDate dateReceived) {
+		this.dateReceived = dateReceived;
+	}
+
+	public Instant getLastModified() {
+		return lastModified;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postCode) {
+		this.postcode = postCode;
+	}
+
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	public String getTelNo() {
+		return telNo;
+	}
+
+	public void setTelNo(String telNo) {
+		this.telNo = telNo;
+	}
+
+	public String getVehicleMakeAndModel() {
+		return vehicleMakeAndModel;
+	}
+
+	public void setVehicleMakeAndModel(String vehicleMakeAndModel) {
+		this.vehicleMakeAndModel = vehicleMakeAndModel;
+	}
+
+	public String getVehicleReg() {
+		return vehicleReg;
+	}
+
+	public void setVehicleReg(String vehicleReg) {
+		this.vehicleReg = vehicleReg;
+	}
+
+	public String getDamageDescription() {
+		return damageDescription;
+	}
+
+	public void setDamageDescription(String damageDescription) {
+		this.damageDescription = damageDescription;
+	}
+
+	public Boolean getImagesRequired() {
+		return imagesRequired;
+	}
+
+	public void setImagesRequired(Boolean imagesRequired) {
+		this.imagesRequired = imagesRequired;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public String getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+
+	public String getLeadSource() {
+		return leadSource;
+	}
+
+	public void setLeadSource(String leadSource) {
+		this.leadSource = leadSource;
+	}
+
+	public String getTraderName() {
+		return traderName;
+	}
+
+	public void setTraderName(String traderName) {
+		this.traderName = traderName;
+	}
+
+	public String getTradeContactName() {
+		return tradeContactName;
+	}
+
+	public void setTradeContactName(String tradeContactName) {
+		this.tradeContactName = tradeContactName;
+	}
+	
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -124,12 +322,27 @@ public class Job {
 				+ ((damageDescription == null) ? 0 : damageDescription
 						.hashCode());
 		result = prime * result
+				+ ((dateReceived == null) ? 0 : dateReceived.hashCode());
+		result = prime * result
 				+ ((emailAddress == null) ? 0 : emailAddress.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result
+				+ ((imagesRequired == null) ? 0 : imagesRequired.hashCode());
+		result = prime * result
+				+ ((leadSource == null) ? 0 : leadSource.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
+		result = prime * result
+				+ ((postcode == null) ? 0 : postcode.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((telNo == null) ? 0 : telNo.hashCode());
+		result = prime
+				* result
+				+ ((tradeContactName == null) ? 0 : tradeContactName.hashCode());
+		result = prime * result
+				+ ((traderName == null) ? 0 : traderName.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime
 				* result
 				+ ((vehicleMakeAndModel == null) ? 0 : vehicleMakeAndModel
@@ -138,6 +351,7 @@ public class Job {
 				+ ((vehicleReg == null) ? 0 : vehicleReg.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -157,12 +371,27 @@ public class Job {
 				return false;
 		} else if (!damageDescription.equals(other.damageDescription))
 			return false;
+		if (dateReceived == null) {
+			if (other.dateReceived != null)
+				return false;
+		} else if (!dateReceived.equals(other.dateReceived))
+			return false;
 		if (emailAddress == null) {
 			if (other.emailAddress != null)
 				return false;
 		} else if (!emailAddress.equals(other.emailAddress))
 			return false;
 		if (id != other.id)
+			return false;
+		if (imagesRequired == null) {
+			if (other.imagesRequired != null)
+				return false;
+		} else if (!imagesRequired.equals(other.imagesRequired))
+			return false;
+		if (leadSource == null) {
+			if (other.leadSource != null)
+				return false;
+		} else if (!leadSource.equals(other.leadSource))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -174,15 +403,34 @@ public class Job {
 				return false;
 		} else if (!orderId.equals(other.orderId))
 			return false;
+		if (postcode == null) {
+			if (other.postcode != null)
+				return false;
+		} else if (!postcode.equals(other.postcode))
+			return false;
 		if (price == null) {
 			if (other.price != null)
 				return false;
 		} else if (!price.equals(other.price))
 			return false;
+		if (status != other.status)
+			return false;
 		if (telNo == null) {
 			if (other.telNo != null)
 				return false;
 		} else if (!telNo.equals(other.telNo))
+			return false;
+		if (tradeContactName == null) {
+			if (other.tradeContactName != null)
+				return false;
+		} else if (!tradeContactName.equals(other.tradeContactName))
+			return false;
+		if (traderName == null) {
+			if (other.traderName != null)
+				return false;
+		} else if (!traderName.equals(other.traderName))
+			return false;
+		if (type != other.type)
 			return false;
 		if (vehicleMakeAndModel == null) {
 			if (other.vehicleMakeAndModel != null)
@@ -196,13 +444,31 @@ public class Job {
 			return false;
 		return true;
 	}
+
+
+
+	public int getVersion() {
+		return version;
+	}
+
+	public Instant getCreatedDate() {
+		return createdDate;
+	}
+
 	@Override
 	public String toString() {
-		return "Job [id=" + id + ", orderId=" + orderId + ", name=" + name
-				+ ", vehicleReg=" + vehicleReg + ", address=" + address
-				+ ", emailAddress=" + emailAddress + ", telNo=" + telNo
-				+ ", vehicleMakeAndModel=" + vehicleMakeAndModel
-				+ ", damageDescription=" + damageDescription + ", price="
-				+ price + "]";
+		return "Job [id=" + id + ", type=" + type + ", status=" + status
+				+ ", dateReceived=" + dateReceived + ", version=" + version
+				+ ", createdDate=" + createdDate + ", lastModified="
+				+ lastModified + ", name=" + name + ", address=" + address
+				+ ", postcode=" + postcode + ", emailAddress=" + emailAddress
+				+ ", telNo=" + telNo + ", vehicleMakeAndModel="
+				+ vehicleMakeAndModel + ", vehicleReg=" + vehicleReg
+				+ ", damageDescription=" + damageDescription
+				+ ", imagesRequired=" + imagesRequired + ", price=" + price
+				+ ", orderId=" + orderId + ", leadSource=" + leadSource
+				+ ", traderName=" + traderName + ", tradeContactName="
+				+ tradeContactName + "]";
 	}
+
 }

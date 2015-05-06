@@ -22,17 +22,36 @@
 <body>
 	<h1>Add new job</h1>
 	<form action="#" th:action="@{/web/jobs/add}" th:object="${job}" method="post">
-    	<!-- <p>Id: <input type="text" th:field="*{id}" /></p>
-        <p>Message: <input type="text" th:field="*{content}" /></p>
-        <p>Message: <input type="text" th:field="*{id}">1001</td>-->
+    	<!-- <p>Id: <input type="text" th:field="*{id}">1001</td>-->
+    	<div><label for="type" th:text="#{jobform.jobType}">Type: </label>
+        <label for="typ-retail"
+                th:text="#{jobform.jobType.retail}"><input id="typ-retail" type="radio" th:field="*{type}" name="type" value="${JobType.RETAIL}" />Retail</label>
+        <label for="typ-national"
+                th:text="#{jobform.jobType.national_account}"><input id="typ-national" type="radio" th:field="*{type}" name="type" value="${JobType.NATIONAL_ACCOUNT}" />National Acc.</label>
+        <label for="typ-trade"
+                th:text="#{jobform.jobType.trade}"><input id="typ-trade" type="radio" th:field="*{type}" name="type" value="${JobType.TRADE}" />Trade</label>
+    	</div>
+    	
 		<div><label for="orderId" th:text="#{jobform.jobOrderId}">Order Number: </label><input id="orderId" type="text" th:field="*{orderId}" /></div>
+		<div><label for="traderName" th:text="#{jobform.traderName}">Trader: </label><input id="traderName" type="text" th:field="*{traderName}" /></div>
+		<div><label for="tradeContactName" th:text="#{jobform.tradeContactName}">Trade Contact: </label><input id="tradeContactName" type="text" th:field="*{tradeContactName}" /></div>
+		<div><label for="leadSource" th:text="#{jobform.leadSource}">Lead Source: </label><input id="leadSource" type="text" th:field="*{leadSource}" /></div>
+		<div><label for="status" th:text="#{jobform.status}">Status: </label>
+		<!-- TODO lowercase the state names and strip underscores? -->
+		<select id="status" th:field="*{status}">
+			<option th:each="elem: ${T(uk.co.blc_services.smartgenie.domain.JobStatus).values()}" th:value="${elem.name()}" th:text="${elem.name()}" value="state">state</option>
+		</select>
+		</div>
+		<div><label for="dateReceived" th:text="#{jobform.dateReceived}">Date Received: </label><input id="dateReceived" type="date" th:field="*{dateReceived}" /></div>
 		<div><label for="vehicleReg" th:text="#{jobform.jobVehicleReg}">Vehicle Registration: </label><input id="vehicleReg" type="text" th:field="*{vehicleReg}" /></div>
 		<div><label for="name" th:text="#{jobform.jobName}">Customer Name: </label><input id="name" type="text" th:field="*{name}" /></div>
 		<div><label for="address" class="address" th:text="#{jobform.jobAddress}">Customer Address: </label><textarea id="address" th:field="*{address}"></textarea></div>
+		<div><label for="postcode" th:text="#{jobform.jobPostcode}">Postcode: </label><input id="postcode" type="text" th:field="*{postcode}" /></div>
 		<div><label for="emailAddress" th:text="#{jobform.jobEmailAddress}">Customer Email: </label><input id="emailAddress" type="email" th:field="*{emailAddress}" /></div>
 		<div><label for="telNo" th:text="#{jobform.jobTelNo}">Customer Phone: </label><input id="telNo" type="tel" th:field="*{telNo}" /></div>
 		<div><label for="vehicleMakeAndModel" th:text="#{jobform.jobVehicleMakeAndModel}">Vehicle Make &amp; Model: </label><input id="vehicleMakeAndModel" type="text" th:field="*{vehicleMakeAndModel}" /></div>
 		<div><label for="damageDescription" th:text="#{jobform.jobDamageDescription}">Damage Description: </label><textarea id="damageDescription" th:field="*{damageDescription}"></textarea></div>
+		<div><label for="imagesRequired" th:text="#{jobform.jobImagesRequired}">Images Required: </label><input id="imagesRequired" type="checkbox" th:field="*{imagesRequired}" /></div>
 		<div><label for="price" th:text="#{jobform.jobPrice}">Quoted Price (Net): </label><input id="price" type="number" step="any" th:field ="*{price}" /></div>
         <input type="submit" value="Submit" /> <input type="reset" value="Reset" />
     </form>
