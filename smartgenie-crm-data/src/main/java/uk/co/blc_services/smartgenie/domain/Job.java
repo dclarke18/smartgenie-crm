@@ -15,6 +15,9 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Version;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 /**
  * Represents the SmartGenie Smart repair Job/Order/Lead.
  * 
@@ -63,6 +66,7 @@ public class Job {
 	 * Date this job was received by company. Not necessarily the date this was
 	 * logged into this system.
 	 */
+	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dateReceived;
 
 	/**

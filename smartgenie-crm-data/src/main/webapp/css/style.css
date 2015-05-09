@@ -370,7 +370,7 @@ fieldset {
 	padding: 0;
 }
 
-input,textarea {
+input,select,textarea {
 	padding: 8px;
 	margin: 4px 10px;
 	background: #fff;
@@ -934,7 +934,7 @@ button,input,select,textarea {
  * 1. Define line-height as normal to match FF3/4 (set using !important in the UA stylesheet)
  * 2. Correct inner spacing displayed oddly in IE6/7
  */
-button,input {
+button,input,select {
 	line-height: normal;
 	*overflow: visible;
 }
@@ -979,12 +979,31 @@ input[type="submit"]:hover {
  */
 input[type="checkbox"],input[type="radio"] {
 	width : initial;
+	height : 25px;
+	margin-left : 15px;
 	box-sizing: content-box;
 	outline: none;
 	-webkit-box-shadow: 0px 0px 0px #aaa;
 	-moz-box-shadow: 0px 0px 0px #aaa;
 	box-shadow: 0px 0px 0px #aaa;
 }
+
+.radiogroup {
+	height : 38px;
+}
+.radiogroup label{
+	width: initial;
+	text-align : left;
+	height : auto;
+	margin : initial;
+}
+
+.radiogroup:after {
+	content:"\a";
+    white-space: pre;
+}
+
+
 
  
 input[type="search"] {
