@@ -43,32 +43,38 @@ $(document).ready(function() {
 		<table id="display-data">
 			<thead>
 				<tr>
-					<th th:text="#{theader.count}">#</th>
+					<!--<th th:text="#{theader.count}">#</th>-->
 					<th th:text="#{theader.jobId}">Job No.</th>
+					<th th:text="#{theader.jobStatus}">Status</th>
 					<th th:text="#{theader.jobOrderId}">Order No.</th>
 					<th th:text="#{theader.jobVehicleReg}">Reg No.</th>
 					<th th:text="#{theader.jobName}">Name</th>
-					<th th:text="#{theader.jobAddress}">Address</th>
-					<th th:text="#{theader.jobEmailAddress}">Email</th>
+					<!-- <th th:text="#{theader.jobAddress}">Address</th> -->
+					<th th:text="#{theader.jobPostcode}">Postcode</th>
+					<!-- <th th:text="#{theader.jobEmailAddress}">Email</th> -->
 					<th th:text="#{theader.jobTelNo}">Tel No.</th>
-					<th th:text="#{theader.jobVehicleMakeAndModel}">Make &amp; Model</th>
+					<!-- <th th:text="#{theader.jobVehicleMakeAndModel}">Make &amp; Model</th>-->
 					<th th:text="#{theader.jobDamageDescription}">Damage Description</th>
 					<th th:text="#{theader.jobPrice}">Price(Net)</th>
+					<th th:text="#{theader.jobType}">Type</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="job, rowStat : ${jobs}">
-					<td th:text="${rowStat.count}">1</td>
+					<!-- <td th:text="${rowStat.count}">1</td> -->
 					<td th:text="${job.id}">1001</td>
+					<td th:text="${job.status}">NEW</td>
 					<td th:text="${job.orderId}">REV-03458-C5K4Y1</td>
 					<td th:text="${job.vehicleReg}">EO59 WXG</td>
 					<td th:text="${job.name}">Dave Clarke</td>
-					<td th:text="${job.address}">No Fixed Abode</td>
-					<td th:text="${job.emailAddress}">dave.clarke@gmail.com</td>
+					<!-- <td th:text="${job.address}">No Fixed Abode</td> -->
+					<td th:text="${job.postcode}">E17 1WY</td>
+					<!-- <td th:text="${job.emailAddress}">dave.clarke@gmail.com</td> -->
 					<td th:text="${job.telNo}">07974 645920</td>
-					<td th:text="${job.vehicleMakeAndModel}">Toyota IQ</td>
+					<!-- <td th:text="${job.vehicleMakeAndModel}">Toyota IQ</td>-->
 					<td th:text="${job.damageDescription}">All panels scraped</td>
-					<td th:text="#{global.currency} + ${#numbers.formatDecimal(job.price,0,'COMMA',2,'POINT')}">£100</td>
+					<td th:text="${job.price} ? #{global.currency} + ${#numbers.formatDecimal(job.price,0,'COMMA',2,'POINT')}">£100</td>
+					<td th:text="${job.type}">Type</td>
 				</tr>
 			</tbody>
 		</table>

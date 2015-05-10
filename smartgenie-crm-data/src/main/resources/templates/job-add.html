@@ -109,7 +109,7 @@
 		</div>
 		<div>
 			<label for="status" th:text="#{jobform.status}">Status: </label>
-			TODO lowercase the state names and strip underscores?
+			<!-- TODO lowercase the state names and strip underscores? -->
 			<select id="status" th:field="*{status}">
 				<option
 					th:each="elem: ${T(uk.co.blc_services.smartgenie.domain.JobStatus).values()}"
