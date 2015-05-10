@@ -60,7 +60,7 @@ $(document).ready(function() {
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="job, rowStat : ${jobs}">
+				<tr th:each="job, rowStat : ${jobs}" th:onclick="'javascript:window.location.assign(\''+@{/web/jobs/edit}+'?id='+${job.id}+'\');'">
 					<!-- <td th:text="${rowStat.count}">1</td> -->
 					<td th:text="${job.id}">1001</td>
 					<td th:text="${job.status}">NEW</td>

@@ -49,7 +49,7 @@ public class Job {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 
 	/**
 	 * Type of the job - this should probably be a class per type consider
@@ -165,11 +165,11 @@ public class Job {
 		this.lastModified = Instant.now();
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
@@ -313,14 +313,38 @@ public class Job {
 	public void setTradeContactName(String tradeContactName) {
 		this.tradeContactName = tradeContactName;
 	}
-	
-	
+
+	public int getVersion() {
+		return version;
+	}
+
+	public Instant getCreatedDate() {
+		return createdDate;
+	}
+
+	@Override
+	public String toString() {
+		return "Job [id=" + id + ", type=" + type + ", status=" + status
+				+ ", dateReceived=" + dateReceived + ", version=" + version
+				+ ", createdDate=" + createdDate + ", lastModified="
+				+ lastModified + ", name=" + name + ", address=" + address
+				+ ", postcode=" + postcode + ", emailAddress=" + emailAddress
+				+ ", telNo=" + telNo + ", vehicleMakeAndModel="
+				+ vehicleMakeAndModel + ", vehicleReg=" + vehicleReg
+				+ ", damageDescription=" + damageDescription
+				+ ", imagesRequired=" + imagesRequired + ", price=" + price
+				+ ", orderId=" + orderId + ", leadSource=" + leadSource
+				+ ", traderName=" + traderName + ", tradeContactName="
+				+ tradeContactName + "]";
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result
+				+ ((createdDate == null) ? 0 : createdDate.hashCode());
 		result = prime
 				* result
 				+ ((damageDescription == null) ? 0 : damageDescription
@@ -329,7 +353,7 @@ public class Job {
 				+ ((dateReceived == null) ? 0 : dateReceived.hashCode());
 		result = prime * result
 				+ ((emailAddress == null) ? 0 : emailAddress.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((imagesRequired == null) ? 0 : imagesRequired.hashCode());
 		result = prime * result
@@ -370,6 +394,11 @@ public class Job {
 				return false;
 		} else if (!address.equals(other.address))
 			return false;
+		if (createdDate == null) {
+			if (other.createdDate != null)
+				return false;
+		} else if (!createdDate.equals(other.createdDate))
+			return false;
 		if (damageDescription == null) {
 			if (other.damageDescription != null)
 				return false;
@@ -385,7 +414,10 @@ public class Job {
 				return false;
 		} else if (!emailAddress.equals(other.emailAddress))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (imagesRequired == null) {
 			if (other.imagesRequired != null)
@@ -447,32 +479,6 @@ public class Job {
 		} else if (!vehicleReg.equals(other.vehicleReg))
 			return false;
 		return true;
-	}
-
-
-
-	public int getVersion() {
-		return version;
-	}
-
-	public Instant getCreatedDate() {
-		return createdDate;
-	}
-
-	@Override
-	public String toString() {
-		return "Job [id=" + id + ", type=" + type + ", status=" + status
-				+ ", dateReceived=" + dateReceived + ", version=" + version
-				+ ", createdDate=" + createdDate + ", lastModified="
-				+ lastModified + ", name=" + name + ", address=" + address
-				+ ", postcode=" + postcode + ", emailAddress=" + emailAddress
-				+ ", telNo=" + telNo + ", vehicleMakeAndModel="
-				+ vehicleMakeAndModel + ", vehicleReg=" + vehicleReg
-				+ ", damageDescription=" + damageDescription
-				+ ", imagesRequired=" + imagesRequired + ", price=" + price
-				+ ", orderId=" + orderId + ", leadSource=" + leadSource
-				+ ", traderName=" + traderName + ", tradeContactName="
-				+ tradeContactName + "]";
 	}
 
 }
