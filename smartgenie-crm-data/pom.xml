@@ -6,7 +6,7 @@
 	<version>0.0.4-SNAPSHOT</version>
 	<name>smartgenie-crm-data</name>
 	<description>Persistence and data access services for the Smartgenie CRM system</description>
-	<packaging>war</packaging>
+	<!-- <packaging>war</packaging>-->
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -40,7 +40,7 @@
 		<!-- use UTF-8 for everything -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<build>
@@ -59,33 +59,6 @@
 		</plugins>
 
 	</build>
-
-	<profiles>
-		<profile>
-			<!-- When built in OpenShift the 'openshift' profile will be used when 
-				invoking mvn. -->
-			<!-- Use this profile for any OpenShift specific customization your app 
-				will need. -->
-			<!-- By default that is to put the resulting archive into the 'webapps' 
-				folder. -->
-			<!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
-			<id>openshift</id>
-			<build>
-				<!--<finalName>smartgenie-crm-data</finalName>-->
-				<plugins>
-					<plugin>
-						<artifactId>maven-war-plugin</artifactId>
-						<version>2.1.1</version>
-						<configuration>
-							<outputDirectory>webapps</outputDirectory>
-							<!-- <warName>ROOT</warName>-->
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
-
 
 	<repositories>
 		<repository>
