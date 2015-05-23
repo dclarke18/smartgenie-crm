@@ -1,0 +1,3 @@
+#!/bin/bash
+cd $OPENSHIFT_REPO_DIR/smartgenie-crm-data
+mvn package -s .openshift/settings.xml -DskipTests=true
