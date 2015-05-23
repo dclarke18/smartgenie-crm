@@ -3,12 +3,12 @@
  */
 package uk.co.blc_services.smartgenie.domain;
 
-import java.time.Instant;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
+
+import org.joda.time.Instant;
 
 /**
  * Record of some change in the history of the job.
