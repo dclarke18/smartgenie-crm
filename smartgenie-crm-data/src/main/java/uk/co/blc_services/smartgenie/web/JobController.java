@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import uk.co.blc_services.smartgenie.domain.Job;
+import uk.co.blc_services.smartgenie.io.HeadOfficeEmailParser;
 import uk.co.blc_services.smartgenie.rest.JobRepository;
 
 @Controller
@@ -57,6 +58,20 @@ public class JobController{
 		repo.delete(id);
 		model.addAttribute("message", "Deleted Job : "+id);
 		return jobList(model);
+	}
+	
+	@RequestMapping(value = "/web/jobs/parse", method = RequestMethod.GET)
+	public String jobEmailForm(Model model) {
+		model.addAttribute("job", new Job());
+		return "email-to-job";
+	}
+	
+	@RequestMapping(value = {"/web/jobs/parse"}, method = RequestMethod.POST)
+	public String jobEmailSubmit(@RequestParam String orderEmail, Model model) {
+		HeadOfficeEmailParser parser = new HeadOfficeEmailParser();
+		Job toAdd = parser.parseEmail(orderEmail);
+		model.addAttribute("job", toAdd);
+		return "job-detail";
 	}
 
 /*    @RequestMapping(value = PATH)

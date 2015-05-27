@@ -6,7 +6,7 @@
 	<version>0.0.4-SNAPSHOT</version>
 	<name>smartgenie-crm-data</name>
 	<description>Persistence and data access services for the Smartgenie CRM system</description>
-	<!-- <packaging>war</packaging>-->
+	<!-- <packaging>war</packaging> -->
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -28,9 +28,9 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -44,6 +44,14 @@
 			<artifactId>guava</artifactId>
 			<version>16.0.1</version>
 		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+
 	</dependencies>
 	<properties>
 		<!-- use UTF-8 for everything -->
