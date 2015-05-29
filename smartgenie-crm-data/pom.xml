@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.co.blc-services</groupId>
 	<artifactId>smartgenie-crm-data</artifactId>
-	<version>0.0.5-SNAPSHOT</version>
+	<version>0.0.5</version>
 	<name>smartgenie-crm-data</name>
 	<description>Persistence and data access services for the Smartgenie CRM system</description>
 	<!-- <packaging>war</packaging> -->
@@ -46,7 +46,10 @@
 			<artifactId>guava</artifactId>
 			<version>16.0.1</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -91,6 +94,42 @@
 		</plugins>
 
 	</build>
+
+	<profiles>
+		<!-- <profile> <id>local</id> <activation> <activeByDefault>true</activeByDefault> 
+			</activation> <build> <resources> <resource> <directory>src/main/resources</directory> 
+			</resource> <resource> <directory>src/main/config/local</directory> </resource> 
+			</resources> </build> </profile> -->
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+					</resource>
+					<resource>
+						<directory>src/main/config/dev</directory>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+		<profile>
+			<id>openshift</id>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+					</resource>
+					<resource>
+						<directory>src/main/config/openshift</directory>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+	</profiles>
 
 	<repositories>
 		<repository>

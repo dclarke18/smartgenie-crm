@@ -147,7 +147,7 @@
 		<div>
 			<label for="address" class="address" th:text="#{jobform.jobAddress}">Customer
 				Address: </label>
-			<textarea id="address" th:field="*{address}"></textarea>
+			<textarea id="address" th:field="*{address}" rows="5"></textarea>
 		</div>
 		<div>
 			<label for="postcode" th:text="#{jobform.jobPostcode}">Postcode:
@@ -172,7 +172,7 @@
 			<label for="damageDescription"
 				th:text="#{jobform.jobDamageDescription}">Damage
 				Description: </label>
-			<textarea id="damageDescription" th:field="*{damageDescription}"></textarea>
+			<textarea id="damageDescription" th:field="*{damageDescription}" rows="3"></textarea>
 		</div>
 		<div>
 			<label for="imagesRequired" th:text="#{jobform.jobImagesRequired}">Images

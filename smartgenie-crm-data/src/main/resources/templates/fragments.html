@@ -24,9 +24,8 @@
 <body>
 	<header th:fragment="header" class="header">
 		<div th:if="${#httpServletRequest.remoteUser != null}">
-			<p th:text="${#httpServletRequest.remoteUser}">sample_user</p>
 			<form class="logout" th:action="@{/logout}" method="post">
-				<input class="logout" type="submit" value="Log out" />
+				<label for="logoutBttn" th:text="'User : ' + ${#httpServletRequest.remoteUser}">current user </label><input id="logoutBttn" class="logout" type="submit" value="Log out" />
 			</form>
 		</div>
 		<div th:if="${#httpServletRequest.remoteUser == null}">

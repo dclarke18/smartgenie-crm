@@ -9,12 +9,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.joda.time.LocalDate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import uk.co.blc_services.smartgenie.domain.Job;
 import uk.co.blc_services.smartgenie.domain.JobStatus;
@@ -31,8 +31,7 @@ import com.google.common.io.CharStreams;
  */
 public class HeadOfficeEmailParser {
 
-	private static final Logger LOG = Logger
-			.getLogger(HeadOfficeEmailParser.class.getName());
+	private static final Logger LOG = LoggerFactory.getLogger(HeadOfficeEmailParser.class.getName());
 
 	private static final String POSTCODE_REGEX = "(GIR 0AA)|((([A-Z-[QVX]][0-9][0-9]?)|(([A-Z-[QVX]][A-Z-[IJZ]][0-9][0-9]?)|(([A-Z-[QVX]][0-9][A-HJKPSTUW])|([A-Z-[QVX]][A-Z-[IJZ]][0-9][ABEHMNPRVWXY])))) [0-9][A-Z-[CIKMOV]]{2})";
 	private static final String ORDER_ID_REGEX = ".*?(?<orderId>REV\\-(?:[0-9]){5}(?:\\-(?:\\w){6})*.*)$";
@@ -59,11 +58,11 @@ public class HeadOfficeEmailParser {
 		for (String line : lines) {
 			// see if it contains a field identifier
 			boolean foundField = false;
-			LOG.log(Level.FINE, "Processing '{0}'", line);
+			LOG.debug("Processing '{}'", line);
 			for (Field field : Field.values()) {
 				if (!field.ident.equalsIgnoreCase("")
 						&& line.contains(field.ident)) {
-					LOG.log(Level.FINE, "Line matched '{0}'", field);
+					LOG.debug("Line matched '{}'", field);
 					foundField = true;
 					String value = line.substring(
 							line.lastIndexOf(field.ident)
@@ -113,8 +112,7 @@ public class HeadOfficeEmailParser {
 						//looks like it contains an order number
 						parsed.setOrderId(orderId);
 					} else {
-					LOG.log(Level.INFO,
-							"Skipping '{0}' as we can't figure out what it is.",
+					LOG.info("Skipping '{}' as we can't figure out what it is.",
 							line);
 					}
 				}
