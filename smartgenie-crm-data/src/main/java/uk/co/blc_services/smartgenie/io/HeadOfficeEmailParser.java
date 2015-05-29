@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -91,8 +92,7 @@ public class HeadOfficeEmailParser {
 							parsed.setVehicleReg(value);
 							break;
 						case PRICE:
-							String rawPrice = value.replace("£", "");
-							parsed.setPrice(new BigDecimal(rawPrice));
+							parsed.setPrice(parsePrice(value));
 							break;
 						default:
 							break;
@@ -138,6 +138,16 @@ public class HeadOfficeEmailParser {
 		}
 	}
 	
+	BigDecimal parsePrice(String line){
+		try {
+			String rawPrice = line.replaceAll("[^\\d\\.]", "");
+			return new BigDecimal(rawPrice);
+		} catch (NumberFormatException e) {
+			LOG.error("Failed to parse price from '"+line+"' platform encoding ="+Charset.defaultCharset().name(), e );
+		}
+		return null;
+	}
+	
 	private void setMutilineValue(Job instance) {
 		if (parsing != null && parsing.isMultiLine() && buffer.length() > 0) {
 			switch (parsing) {
@@ -180,8 +190,7 @@ public class HeadOfficeEmailParser {
 		try {
 			return parseEmail(new ByteArrayInputStream(email.getBytes()));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.error("Failed to parse email from '"+email+"'", e );
 		}
 		return null;
 	}

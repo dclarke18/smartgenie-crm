@@ -81,6 +81,7 @@ public class HeadOfficeEmailParserTest {
 		assertEquals(expected, actual);
 	}
 	
+	@Test
 	public void testParseOrderNo(){
 		
 		assertEquals("REV-03458-C5K4Y1 CRM:0002549", instance.parseOrderNo("FW: New job Complectus Ltd - REV-03458-C5K4Y1 CRM:0002549"));
@@ -89,6 +90,14 @@ public class HeadOfficeEmailParserTest {
 		assertEquals("REV-03458-C5K4Y1", instance.parseOrderNo("Order = REV-03458-C5K4Y1"));
 		assertNull(instance.parseOrderNo("FW: New job Complectus Ltd -"));
 		assertNull(instance.parseOrderNo("REV-0348-5K4Y1"));
+	}
+	
+	@Test
+	public void testParsePrice(){
+		assertEquals(new BigDecimal("102.00"), instance.parsePrice("   £102.00\n"));
+		assertEquals(new BigDecimal("1002.00"), instance.parsePrice("   £1,002.00\n"));
+		assertEquals(new BigDecimal("1"), instance.parsePrice("   £1"));
+		assertEquals(new BigDecimal("100.00"), instance.parsePrice("   $100.00"));
 	}
 
 }
