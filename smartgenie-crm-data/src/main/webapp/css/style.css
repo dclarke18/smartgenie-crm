@@ -63,8 +63,8 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section
 
 footer{
 	height: 50px; 
-	position: absolute;
-	bottom: 0;
+/* 	position: relative;
+	bottom: 0;*/
 	width: inherit;
 	text-align: center;
 }

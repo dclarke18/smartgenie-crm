@@ -47,3 +47,13 @@ Yes - Hourly?
 Missing Features
 ----------------
 Head office format email parser + email box
+
+Openshift Credentials
+---------------------
+MySQL 5.5 database added.  Please make note of these credentials:
+
+       Root User: adminZkPqZXs
+   Root Password: kzkH3iyy3dCE
+   Database Name: smartgenie
+
+Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/
