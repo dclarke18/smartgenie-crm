@@ -61,6 +61,14 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section
 	display: block;
 }
 
+footer{
+	height: 50px; 
+	position: absolute;
+	bottom: 0;
+	width: inherit;
+	text-align: center;
+}
+
 audio[controls],canvas,video {
 	display: inline-block;
 	*display: inline;
@@ -343,7 +351,7 @@ figure {
 /* =============================================================================
    Forms
    ========================================================================== */
-form {
+form:not(.logout) {
 	float: left;
 	border: 1px solid #ddd;
 	padding: 30px 40px 20px 40px;
@@ -873,7 +881,7 @@ figure {
 /* =============================================================================
    Forms
    ========================================================================== */
-form {
+form:not(.logout) {
 	float: left;
 	border: 1px solid #ddd;
 	padding: 30px 40px 20px 40px;
@@ -924,7 +932,7 @@ label {
  * 2. Remove margins in FF3/4 S5 Chrome
  * 3. Define consistent vertical alignment display in all browsers
  */
-button,input,select,textarea {
+button,input,select,textarea:not(.logout){
 	font-size: 100%;
 	vertical-align: baseline;
 	*vertical-align: middle;
@@ -948,7 +956,7 @@ button,input[type="button"],input[type="reset"] {
 	-webkit-appearance: button;
 }
 
-input[type="submit"] {
+input[type="submit"]:not(.logout) {
 	width: 150px;
 	color: #eee;
 	text-transform: uppercase;
@@ -967,7 +975,7 @@ input[type="submit"] {
 	border-radius: 4px;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover:not(.logout) {
 	-webkit-box-shadow: 0px 0px 20px #555;
 	-moz-box-shadow: 0px 0px 20px #aaa;
 	box-shadow: 0px 0px 20px #555;

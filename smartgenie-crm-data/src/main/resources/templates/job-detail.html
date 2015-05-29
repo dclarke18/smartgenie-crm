@@ -73,6 +73,7 @@
 </head>
 
 <body onload="showHideConditional('type');">
+	<div th:replace="fragments :: header" >header</div>
 	<h1 th:unless="${editing}">Add new job</h1>
 	<h1 th:if="${editing}">Edit job</h1>
 	<form action="#" th:action="${editing} ? @{/web/jobs/edit} : @{/web/jobs/add}" th:object="${job}"
@@ -189,6 +190,8 @@
 		<input type="button" value="Delete" th:if="${editing}" th:onclick="'javascript:deleteJob(\''+*{id}+'\');'"/>
 		<input type="reset" value="Reset" th:unless="${editing}"/>
 	</form>
+	
+	<div th:replace="fragments :: footer" >footer</div>
 
 	<script>
 		/*<![CDATA[*/

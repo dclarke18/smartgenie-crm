@@ -39,6 +39,7 @@ $(document).ready(function() {
 </head>
 
 <body>
+	<div th:replace="fragments :: header" >header</div>
 	<div id="container">
 		<a href="/web/jobs/add">Add a Job</a>
 		<a href="/web/jobs/parse">Add from Email</a>
@@ -81,6 +82,7 @@ $(document).ready(function() {
 			</tbody>
 		</table>
 	</div>
+	<div th:replace="fragments :: footer" >footer</div>
 
 	<script>
 		/*<![CDATA[*/

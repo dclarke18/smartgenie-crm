@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+<title>Footer</title>
+<meta name="description" content="Page Footer" />
+
+
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<link rel="stylesheet" href="../../webapp/css/style.css"
+	th:href="@{/css/style.css}" />
+
+<script src="../../webapp/js/libs/modernizr-2.0.6.min.js"
+	th:src="@{/js/libs/modernizr-2.0.6.min.js}"></script>
+
+
+</head>
+
+<body>
+	<header th:fragment="header" class="header">
+		<div th:if="${#httpServletRequest.remoteUser != null}">
+			<p th:text="${#httpServletRequest.remoteUser}">sample_user</p>
+			<form class="logout" th:action="@{/logout}" method="post">
+				<input class="logout" type="submit" value="Log out" />
+			</form>
+		</div>
+		<div th:if="${#httpServletRequest.remoteUser == null}">
+			<a href="#" th:href="@{/login}">Login</a>
+		</div>
+	</header>
+	<footer th:fragment="footer" class="footer">
+		This web application and its content is copyright of BLC IT Services
+		Ltd. <br/>&copy; BLC IT Services Ltd. <span
+			th:text="${#dates.year(#dates.createNow())}"></span> All rights
+		reserved.<br/>
+		<span th:text="${application.releaseVersion}">UNREPLACED</span>
+	</footer>
+</body>
+</html>

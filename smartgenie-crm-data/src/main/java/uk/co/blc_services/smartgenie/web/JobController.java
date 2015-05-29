@@ -1,5 +1,7 @@
 package uk.co.blc_services.smartgenie.web;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.context.ServletContextAware;
 
 import uk.co.blc_services.smartgenie.domain.Job;
 import uk.co.blc_services.smartgenie.io.HeadOfficeEmailParser;
@@ -15,10 +18,35 @@ import uk.co.blc_services.smartgenie.rest.JobRepository;
 
 @Controller
 @SessionAttributes("job")
-public class JobController{
+public class JobController implements ServletContextAware {
 	
 	@Autowired
 	private JobRepository repo;
+	
+	public static final String ATTRIB_RELEASE_VERSION = "releaseVersion";
+	public static final String DEFAULT_VERSION = "UNRELEASED";
+
+	/* (non-Javadoc)
+	 * @see org.springframework.web.context.ServletContextAware#setServletContext(javax.servlet.ServletContext)
+	 */
+	@Override
+	public void setServletContext(ServletContext ctx) {
+		String version = null;
+	        Package aPackage = getClass().getPackage();
+	        if (aPackage != null) {
+	            version = aPackage.getImplementationVersion();
+	            if (version == null) {
+	                version = aPackage.getSpecificationVersion();
+	            }
+	        }
+	    if (version == null) {
+	        // we could not compute the version so use a blank
+	        version = DEFAULT_VERSION;
+	    }
+	    
+		ctx.setAttribute(ATTRIB_RELEASE_VERSION, version);
+
+	}
 
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String welcome() {
