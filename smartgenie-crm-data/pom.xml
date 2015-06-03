@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.co.blc-services</groupId>
 	<artifactId>smartgenie-crm-data</artifactId>
-	<version>0.1.0</version>
+	<version>0.1.1-SNAPSHOT</version>
 	<name>smartgenie-crm-data</name>
 	<description>Persistence and data access services for the Smartgenie CRM system</description>
 	<!-- <packaging>war</packaging> -->
